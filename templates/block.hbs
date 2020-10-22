@@ -1,0 +1,81 @@
+{{#if details.results}}
+  <div>
+    <a href="https://hashdd.com/i/{{block.entity.value}}" class="p-link">Pivot to HASHDD {{fa-icon "external-link-square" class="external-link-icon"}}</a>
+  </div>
+
+  <span class="p-title">{{fa-icon "info" fixedWidth=true}} NSRL RDS Search Results</span>
+
+  {{#each details.results as |result index|}}
+      <h1 class="p-title">
+        Result #{{inc index}}
+      </h1>
+      {{#if result.hashdd_file_name}}
+        {{#each result.hashdd_file_name as |name|}}
+          <span class="p-key">File Name: </span>
+          <span class="p-value">{{name}}</span>
+        {{/each}}
+      {{/if}}
+      {{#if result.hashdd_size}}
+        <div>
+            <span class="p-key">File Size: </span>
+            <span class="p-value">{{result.hashdd_size}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_md5}}
+        <div>
+            <span class="p-key">MD5: </span>
+            <span class="p-value">{{result.hashdd_md5}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_sha1}}
+        <div>
+            <span class="p-key">SHA-1: </span>
+            <span class="p-value">{{result.hashdd_sha1}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_sha256}}
+        <div>
+            <span class="p-key">SHA-256: </span>
+            <span class="p-value">{{result.hashdd_sha256}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_sha512}}
+        <div>
+            <span class="p-key">SHA-512: </span>
+            <span class="p-value">{{result.hashdd_sha512}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_product_manufacturer}}
+        <div>
+            <span class="p-key">Product Manufacturer: </span>
+            <span class="p-value">{{result.hashdd_product_manufacturer}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_product_name}}
+        <div>
+            <span class="p-key">Product Name: </span>
+            <span class="p-value">{{result.hashdd_product_name}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_product_version}}
+        <div>
+            <span class="p-key">Product Version: </span>
+            <span class="p-value">{{result.hashdd_product_version}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_productapplicationtype}}
+        <div>
+            <span class="p-key">Product Application Type: </span>
+            <span class="p-value">{{result.hashdd_productapplicationtype}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_productlanguage}}
+        <div>
+            <span class="p-key">Product Language: </span>
+            <span class="p-value">{{result.hashdd_productlanguage}}</span>
+        </div>
+      {{/if}}
+      <hr>
+  {{/each}}
+
+{{/if}}
