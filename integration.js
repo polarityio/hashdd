@@ -49,7 +49,7 @@ function doLookup(entities, options, cb) {
 
   Logger.debug(entities);
   entities.forEach((entity) => {
-    let postData = {"hash": entity.value, "api_key":  options.apiKey};
+    let postData = { hash: entity.value, api_key: options.apiKey };
     let requestOptions = {
       method: 'POST',
       uri: `https://api.hashdd.com/nsrl`,
@@ -59,8 +59,8 @@ function doLookup(entities, options, cb) {
 
     Logger.trace({ requestOptions }, 'Request Options');
 
-    tasks.push(function(done) {
-      requestWithDefaults(requestOptions, function(error, res, body) {
+    tasks.push(function (done) {
+      requestWithDefaults(requestOptions, function (error, res, body) {
         Logger.trace({ body, status: res.statusCode });
         let processedResult = handleRestError(error, entity, res, body);
 
@@ -82,17 +82,22 @@ function doLookup(entities, options, cb) {
     }
 
     results.forEach((result) => {
-      if (result.body === null || result.body.length === 0 || result.body[result.entity.value].result === "NOT_FOUND") {
+      if (
+        result.body === null ||
+        result.body.length === 0 ||
+        result.body[result.entity.value].result === 'NOT_FOUND'
+      ) {
         lookupResults.push({
           entity: result.entity,
           data: null
         });
       } else {
+        const details = result.body[result.entity.value];
         lookupResults.push({
           entity: result.entity,
           data: {
-            summary: [],
-            details: result.body[result.entity.value]
+            summary: [details.results ? [`Result Count: ${details.results.length}`] : []],
+            details
           }
         });
       }
@@ -148,7 +153,8 @@ function handleRestError(error, entity, res, body) {
 function validateOption(errors, options, optionName, errMessage) {
   if (
     typeof options[optionName].value !== 'string' ||
-    (typeof options[optionName].value === 'string' && options[optionName].value.length === 0)
+    (typeof options[optionName].value === 'string' &&
+      options[optionName].value.length === 0)
   ) {
     errors.push({
       key: optionName,

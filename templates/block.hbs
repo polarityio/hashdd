@@ -21,6 +21,24 @@
             <span class="p-value">{{result.hashdd_size}}</span>
         </div>
       {{/if}}
+      {{#if result.hashdd_product_manufacturer}}
+        <div>
+            <span class="p-key">Product Manufacturer: </span>
+            <span class="p-value">{{result.hashdd_product_manufacturer}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_product_name}}
+        <div>
+            <span class="p-key">Product Name: </span>
+            <span class="p-value">{{result.hashdd_product_name}}</span>
+        </div>
+      {{/if}}
+      {{#if result.hashdd_product_version}}
+        <div>
+            <span class="p-key">Product Version: </span>
+            <span class="p-value">{{result.hashdd_product_version}}</span>
+        </div>
+      {{/if}}
       {{#if result.hashdd_md5}}
         <div>
             <span class="p-key">MD5: </span>
@@ -43,24 +61,6 @@
         <div>
             <span class="p-key">SHA-512: </span>
             <span class="p-value">{{result.hashdd_sha512}}</span>
-        </div>
-      {{/if}}
-      {{#if result.hashdd_product_manufacturer}}
-        <div>
-            <span class="p-key">Product Manufacturer: </span>
-            <span class="p-value">{{result.hashdd_product_manufacturer}}</span>
-        </div>
-      {{/if}}
-      {{#if result.hashdd_product_name}}
-        <div>
-            <span class="p-key">Product Name: </span>
-            <span class="p-value">{{result.hashdd_product_name}}</span>
-        </div>
-      {{/if}}
-      {{#if result.hashdd_product_version}}
-        <div>
-            <span class="p-key">Product Version: </span>
-            <span class="p-value">{{result.hashdd_product_version}}</span>
         </div>
       {{/if}}
       {{#if result.hashdd_productapplicationtype}}
