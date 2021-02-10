@@ -1,78 +1,87 @@
-{{#if details.results}}
-  <div>
-    <a href="https://hashdd.com/i/{{block.entity.value}}" class="p-link">Pivot to HASHDD {{fa-icon "external-link-square" class="external-link-icon"}}</a>
-  </div>
+{{#if details.search_results}}
 
   <span class="p-title">{{fa-icon "info" fixedWidth=true}} NSRL RDS Search Results</span>
 
-  {{#each details.results as |result index|}}
+  {{#each details.search_results as |result index|}}
       <h1 class="p-title">
         Result #{{inc index}}
       </h1>
-      {{#if result.hashdd_file_name}}
-        {{#each result.hashdd_file_name as |name|}}
-          <span class="p-key">File Name: </span>
-          <span class="p-value">{{name}}</span>
-        {{/each}}
+      {{#if result.result}}
+        <div>
+            <span class="p-key">Result: </span>
+            <span class="p-value"><b>{{result.result}}</b></span>
+        </div>
       {{/if}}
-      {{#if result.hashdd_size}}
+      {{#if result.knownlevel}}
+        <div>
+            <span class="p-key">Known Level: </span>
+            <span class="p-value"><b>{{result.knownlevel}}</b></span>
+        </div>
+      {{/if}}
+      {{#if result.details.hashdd_file_name}}
+        <div>
+            <span class="p-key">File Name: </span>
+            <span class="p-value">{{result.details.hashdd_file_name}}</span>
+        </div>
+      {{/if}}
+      {{#if result.details.hashdd_size}}
         <div>
             <span class="p-key">File Size: </span>
-            <span class="p-value">{{result.hashdd_size}}</span>
+            <span class="p-value">{{result.details.hashdd_size}} bytes</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_product_manufacturer}}
+      {{#if result.details.hashdd_product_manufacturer}}
         <div>
             <span class="p-key">Product Manufacturer: </span>
-            <span class="p-value">{{result.hashdd_product_manufacturer}}</span>
+            <span class="p-value">{{result.details.hashdd_product_manufacturer}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_product_name}}
+      {{#if result.details.hashdd_product_name}}
         <div>
             <span class="p-key">Product Name: </span>
-            <span class="p-value">{{result.hashdd_product_name}}</span>
+            <span class="p-value">{{result.details.hashdd_product_name}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_product_version}}
+      {{#if result.details.hashdd_product_version}}
         <div>
             <span class="p-key">Product Version: </span>
-            <span class="p-value">{{result.hashdd_product_version}}</span>
+            <span class="p-value">{{result.details.hashdd_product_version}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_md5}}
+      {{#if result.details.hashdd_md5}}
         <div>
             <span class="p-key">MD5: </span>
-            <span class="p-value">{{result.hashdd_md5}}</span>
+            <span class="p-value">{{result.details.hashdd_md5}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_sha1}}
+      {{#if result.details.hashdd_sha1}}
         <div>
             <span class="p-key">SHA-1: </span>
-            <span class="p-value">{{result.hashdd_sha1}}</span>
+            <span class="p-value">{{result.details.hashdd_sha1}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_sha256}}
+      {{#if result.details.hashdd_sha256}}
         <div>
             <span class="p-key">SHA-256: </span>
-            <span class="p-value">{{result.hashdd_sha256}}</span>
+            <span class="p-value">{{result.details.hashdd_sha256}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_sha512}}
+      {{#if result.details.hashdd_sha512}}
         <div>
             <span class="p-key">SHA-512: </span>
-            <span class="p-value">{{result.hashdd_sha512}}</span>
+            <span class="p-value">{{result.details.hashdd_sha512}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_productapplicationtype}}
+      {{#if result.details.hashdd_productapplicationtype}}
         <div>
             <span class="p-key">Product Application Type: </span>
-            <span class="p-value">{{result.hashdd_productapplicationtype}}</span>
+            <span class="p-value">{{result.details.hashdd_productapplicationtype}}</span>
         </div>
       {{/if}}
-      {{#if result.hashdd_productlanguage}}
+      {{#if result.details.hashdd_productlanguage}}
         <div>
             <span class="p-key">Product Language: </span>
-            <span class="p-value">{{result.hashdd_productlanguage}}</span>
+            <span class="p-value">{{result.details.hashdd_productlanguage}}</span>
         </div>
       {{/if}}
       <hr>
