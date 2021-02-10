@@ -49,11 +49,9 @@ function doLookup(entities, options, cb) {
 
   Logger.debug(entities);
   entities.forEach((entity) => {
-    let postData = { hash: entity.value, api_key: options.apiKey };
     let requestOptions = {
-      method: 'POST',
-      uri: `https://api.hashdd.com/nsrl`,
-      body: postData,
+      method: 'GET',
+      uri: `https://api.hashdd.com/v1/detail/nsrl/${entity.value}`,
       json: true
     };
 
@@ -64,10 +62,7 @@ function doLookup(entities, options, cb) {
         Logger.trace({ body, status: res.statusCode });
         let processedResult = handleRestError(error, entity, res, body);
 
-        if (processedResult.error) {
-          done(processedResult);
-          return;
-        }
+        if (processedResult.error) return done(processedResult);
 
         done(null, processedResult);
       });
@@ -77,26 +72,25 @@ function doLookup(entities, options, cb) {
   async.parallelLimit(tasks, MAX_PARALLEL_LOOKUPS, (err, results) => {
     if (err) {
       Logger.error({ err: err }, 'Error');
-      cb(err);
-      return;
+      return cb(err);
     }
 
     results.forEach((result) => {
       if (
         result.body === null ||
         result.body.length === 0 ||
-        result.body[result.entity.value].result === 'NOT_FOUND'
+        result.body.result !== "SUCCESS"
       ) {
         lookupResults.push({
           entity: result.entity,
           data: null
         });
       } else {
-        const details = result.body[result.entity.value];
+        const details = result.body;
         lookupResults.push({
           entity: result.entity,
           data: {
-            summary: [details.results ? [`Result Count: ${details.results.length}`] : []],
+            summary: [details.search_results ? [`Result Count: ${details.search_results.length}`] : []],
             details
           }
         });
@@ -127,17 +121,17 @@ function handleRestError(error, entity, res, body) {
   } else if (res.statusCode === 400) {
     result = {
       error: 'Bad Request',
-      detail: body.query_status
+      detail: body
     };
   } else if (res.statusCode === 404) {
     result = {
       error: 'Not Found',
-      detail: body.query_status
+      detail: body
     };
   } else if (res.statusCode === 429) {
     result = {
       error: 'Rate Limit Exceeded',
-      detail: body.query_status
+      detail: body
     };
   } else {
     result = {

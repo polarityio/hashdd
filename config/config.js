@@ -24,7 +24,7 @@ module.exports = {
    */
   description:
     "This integration queries hashes against the NSRL RDS Hash list published by NIST",
-  entityTypes: ["hash"],
+  entityTypes: ["MD5"],
   /**
    * Provide custom component logic and template for rendering the integration details block.  If you do not
    * provide a custom template and/or component then the integration will display data as a table of key value
